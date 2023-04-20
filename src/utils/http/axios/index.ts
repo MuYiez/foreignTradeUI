@@ -20,7 +20,7 @@ import { useUserStoreWithOut } from '/@/store/modules/user';
 const globSetting = useGlobSetting();
 const urlPrefix = globSetting.urlPrefix;
 const { createMessage, createErrorModal } = useMessage();
-let responseType:string | undefined = 'normal'
+let responseType: string | undefined = 'normal';
 
 /**
  * @description: 数据处理，方便区分多种处理方式
@@ -36,7 +36,7 @@ const transform: AxiosTransform = {
     if (isReturnNativeResponse) {
       return res;
     }
-    
+
     // 不进行任何处理，直接返回
     // 用于页面代码可能需要直接获取code，data，message这些信息时开启
     if (!isTransformResponse) {
@@ -53,12 +53,14 @@ const transform: AxiosTransform = {
     const { code, result, message } = data;
 
     // 这里逻辑可以根据项目进行修改
-    const hasSuccess = data && (Reflect.has(data, 'code') && (code == ResultEnum.SUCCESS || code == 0))||responseType == ResultEnum.RESPONSE;
+    const hasSuccess =
+      (data && Reflect.has(data, 'code') && (code == ResultEnum.SUCCESS || code == 0)) ||
+      responseType == ResultEnum.RESPONSE;
     if (hasSuccess) {
-      if(responseType == ResultEnum.RESPONSE){
-        return data
-      }else{
-        return data.data || result || data
+      if (responseType == ResultEnum.RESPONSE) {
+        return data;
+      } else {
+        return data.data || result || data;
       }
     }
 
@@ -93,7 +95,7 @@ const transform: AxiosTransform = {
   // 请求之前处理config
   beforeRequestHook: (config, options) => {
     const { apiUrl, joinPrefix, joinParamsToUrl, formatDate, joinTime = true, urlPrefix } = options;
-    responseType = config.responseType
+    responseType = config.responseType;
     if (joinPrefix) {
       config.url = `${urlPrefix}${config.url}`;
     }
@@ -207,7 +209,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
         // authentication schemes，e.g: Bearer
         // authenticationScheme: 'Bearer',
         authenticationScheme: '',
-        timeout: 10 * 1000,
+        timeout: 60 * 1000,
         // 基础接口地址
         // baseURL: globSetting.apiUrl,
 

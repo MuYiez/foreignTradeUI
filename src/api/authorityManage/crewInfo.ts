@@ -8,6 +8,7 @@ enum Api {
   addCrew = '/api/crew/addCrew',
   getHomePage = '/api/crew/getHomePage',
   getMenu = '/api/getMenu',
+  complexity = '/api/chatgpt/complexity',
 }
 
 /**
@@ -82,6 +83,17 @@ export function editCrew(params: any) {
 export function addCrew(params: any) {
   return defHttp.request({
     url: Api.addCrew,
+    method: 'post',
+    params,
+  });
+}
+
+/**
+ * @description: 新增成员
+ */
+export function complexity(params: any) {
+  return defHttp.request({
+    url: Api.complexity,
     method: 'post',
     params,
   });

@@ -65,7 +65,7 @@ export default {
     signUpFormTitle: '注册',
     forgetFormTitle: '重置密码',
 
-    signInTitle: '宝龙集团行政管理系统',
+    signInTitle: '宝龙外贸行政管理系统',
     signInDesc: '直接点击登录按钮即可登录进行管理',
     policy: '我同意xxx隐私政策',
     scanSign: `扫码后点击"确认"，即可完成登录`,
